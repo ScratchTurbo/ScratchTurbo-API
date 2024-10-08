@@ -70,7 +70,7 @@ function EncryptArray(array) {
 }
 app.use((req, res, next) => {
     // Allow requests from both 'https://snail-ide.vercel.app' and 'https://snail-ide.js.org,' this also allows our test frontend
-    res.header('Access-Control-Allow-Origin', 'https://snail-ide.vercel.app/', 'https://snail-ide.js.org', 'https://test-henna-alpha-94.vercel.app/', 'https://snail-ide.com', 'https://editor.snail-ide.com');
+    res.header('Access-Control-Allow-Origin', 'https://scratchturbo.replit.app/', 'https://scrachturbo.replit.app/upload/', 'https://test-henna-alpha-94.vercel.app/', 'https://snail-ide.com', 'https://studios-scratchturbo.replit.app/');
     // You can also use '*' to allow any origin, but this is less secure
     // res.header('Access-Control-Allow-Origin', '*');
     next();
@@ -202,12 +202,12 @@ const errorHandler = (err, req, res, next) => {
     // Allow requests from both 'https://snail-ide.vercel.app' and 'https://snail-ide.js.org,' this also allows our test frontend
     const origin = req.header('Origin');
     switch (origin) {
-        case 'https://snail-ide.vercel.app':
-        case 'https://snail-ide.js.org':
+        case 'https://scratchturbo.replit.app':
+        case 'https://studios-scratchturbo.replit.app':
         case 'https://test-henna-alpha-94.vercel.app':
-        case 'https://snail-ide.com':
+        case 'https://scratchturbo.replit.app':
         // case 'http://localhost:5173':
-        case 'https://editor.snail-ide.com':
+        case 'https://studios-scratchturbo.replit.app':
             res.set('Access-Control-Allow-Origin', origin);
             break;
         default:
@@ -224,7 +224,7 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler);
 
 app.get('/', async function (_, res) { // just basic stuff. returns the home page
-    res.redirect('https://snail-ide.vercel.app/');
+    res.redirect('https://scratchturbo.replit.app/');
 });
 app.get('/robots.txt', async function (_, res) { // more basic stuff!!!!! returns robots.txt
     res.sendFile(path.join(__dirname, './robots.txt'));
@@ -630,7 +630,7 @@ app.get('/api/users/login', async function (req, res) { // login with scratch
         //       thank you cors, you finally did something useful
 
         // malicious APPS could, but at that point your just :trollface:d so :idk_man:
-        const invalidRedirect = response.redirect !== 'https://snailshare.dreamhosters.com/api/users/login';
+        const invalidRedirect = response.redirect !== 'https://mainapi-scratchturbo.replit.app/api/users/login';
         if ((!response.valid) || (invalidRedirect)) {
             res.status(400);
             res.header("Content-Type", 'application/json');
@@ -665,7 +665,7 @@ app.get('/api/users/loginLocal', async function (req, res) { // login with local
 
         // malicious APPS could, but at that point your just :trollface:d so :idk_man:
         const invalidRedirect =
-            response.redirect !== 'https://snailshare-backend.glitch.me/api/users/loginLocal'
+            response.redirect !== 'https://mainapi-scratchturbo.replit.app/api/users/loginLocal'
             && response.redirect !== 'http://localhost:8080/api/users/loginLocal';
         if ((!response.valid) || (invalidRedirect)) {
             res.status(400);
@@ -1899,7 +1899,7 @@ app.get('/api/projects/approve', async function (req, res) {
                 title: `${project.name} was approved`,
                 color: 0x00ff00,
                 image: { url: projectImage },
-                url: "https://snail-ide.js.org/#" + project.id,
+                url: "https://studios-scratchturbo.replit.app/#" + project.id,
                 fields: [
                     {
                         name: "Approved by",
@@ -1934,11 +1934,11 @@ app.get('/api/projects/approve', async function (req, res) {
             description: String(project.instructions + "\n\n" + project.notes).substring(0, 2040),
             image: { url: projectImage },
             color: (isUpdated ? 14567657 : (isRemix ? 6618880 : 41440)),
-            url: String("https://snail-ide.js.org/#" + String(project.id)),
+            url: String("https://studios-scratchturbo.replit.app/#" + String(project.id)),
             author: {
                 name: String(project.owner).substring(0, 50),
                 icon_url: String("https://trampoline.turbowarp.org/avatars/by-username/" + String(project.owner).substring(0, 50)),
-                url: String("https://snail-ide.vercel.app/profile?user=" + String(project.owner).substring(0, 50))
+                url: String("https://scratchturbo.replit.app/profile?user=" + String(project.owner).substring(0, 50))
             }
         }]
     });
@@ -2394,7 +2394,7 @@ app.get('/api/projects/feature', async function (req, res) {
             title: projectTitle,
             image: { url: projectImage },
             color: 16771677,
-            url: String("https://snail-ide.js.org/#" + String(project.id)),
+            url: String("https:///#" + String(project.id)),
             author: {
                 name: String(project.owner).substring(0, 50),
                 icon_url: String("https://trampoline.turbowarp.org/avatars/by-username/" + String(project.owner).substring(0, 50)),
